@@ -29,9 +29,9 @@ public class NettyServer implements Runnable {
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
                             socketChannel.pipeline().addLast(
-                                    new ObjectDecoder(ClassResolvers.cacheDisabled(null)),
-                                    new ObjectEncoder(),
-                                    new ObjectReadHandler());
+                                    new StringDecoder(),
+                                    new StringEncoder(),
+                                    new ChatHandler());
                         }
                     });
             ChannelFuture future = bootstrap.bind("localhost", 8189).sync();
